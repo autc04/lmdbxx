@@ -1410,37 +1410,16 @@ public:
 
   /**
    * Constructor.
+   */
+  dbi() noexcept = default;
+
+  /**
+   * Constructor.
    *
    * @param handle a valid `MDB_dbi` handle
    */
   dbi(const MDB_dbi handle) noexcept
     : _handle{handle} {}
-
-  /**
-   * Move constructor.
-   */
-  dbi(dbi&& other) noexcept {
-    std::swap(_handle, other._handle);
-  }
-
-  /**
-   * Move assignment operator.
-   */
-  dbi& operator=(dbi&& other) noexcept {
-    if (this != &other) {
-      std::swap(_handle, other._handle);
-    }
-    return *this;
-  }
-
-  /**
-   * Destructor.
-   */
-  ~dbi() noexcept {
-    if (_handle) {
-      /* No need to call close() here. */
-    }
-  }
 
   /**
    * Returns the underlying `MDB_dbi` handle.
